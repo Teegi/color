@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Өнгө сонгогч</title>
+  <style>
+    :root { --red: #e63946; --blue: #1d3557; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #f4f4f4;
+      transition: background 0.4s ease;
+      color: #fff;
+      text-align: center;
+      padding: 24px;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 5vw, 2.6rem);
+      margin-bottom: 8px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    #label {
+      font-size: clamp(1.1rem, 4vw, 1.6rem);
+      opacity: 0.95;
+      margin-bottom: 32px;
+      min-height: 1.6em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    #pick {
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      background: #fff;
+      color: #222;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      transition: transform 0.1s ease;
+    }
+    #pick:hover { transform: translateY(-2px); }
+    #pick:active { transform: translateY(1px); }
+    /* анхны төлөвт текст харагдахын тулд */
+    body:not(.picked) h1,
+    body:not(.picked) #label { color: #222; text-shadow: none; }
+  </style>
+</head>
+<body>
+  <h1>Өнгө сонгогч</h1>
+  <p id="label">Товч дарж 2 өнгөний нэгийг санамсаргүйгээр сонго</p>
+  <button id="pick">Сонгох</button>
+
+  <script>
+    const colors = [
+      { name: "Улаан", value: "#e63946" },
+      { name: "Хөх",  value: "#1d3557" }
+    ];
+    const btn = document.getElementById("pick");
+    const label = document.getElementById("label");
+
+    btn.addEventListener("click", () => {
+      const c = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.background = c.value;
+      document.body.classList.add("picked");
+      label.textContent = "Сонгогдсон өнгө: " + c.name + " (" + c.value + ")";
+    });
+  </script>
+</body>
+</html>
